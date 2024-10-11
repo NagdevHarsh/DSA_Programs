@@ -1,0 +1,45 @@
+Problem Explanation
+The task is to remove duplicates from a sorted array in-place such that each unique element appears at most twice. You must return the new length of the array (k), where the first k elements contain the final result. The remaining elements can be ignored.
+
+Key Requirements:
+In-place Modification: Modify the nums array without using extra space.
+Element Duplication Rule: Each unique element can appear at most twice.
+Return Value: Return k, the number of valid elements remaining after removing excess duplicates.
+
+Approach:
+We can use a two-pointer technique:
+Pointer i: Iterates through the array.
+Pointer k: Tracks the position where the next allowed element (appearing at most twice) should be placed.
+Checking Frequency: We will allow at most two occurrences of each unique number by comparing the current element with the element located at k-2.
+
+Steps:
+Iterate through the array with pointer i.
+Compare nums[i] with nums[k-2]. If nums[i] is not equal to nums[k-2], it means we can allow another occurrence of nums[i], so we place it at nums[k] and increment k.
+Continue until all elements are processed.
+
+PYTHON CODE:
+def removeDuplicates(nums):
+    if len(nums) <= 2:
+        return len(nums)  # No need to process if array is of length 2 or less
+
+    k = 2  # We allow the first two elements by default since at least two duplicates are allowed
+
+    for i in range(2, len(nums)):
+        # Check if the current element is not equal to nums[k-2]
+        if nums[i] != nums[k-2]:
+            nums[k] = nums[i]  # Place it at the next position
+            k += 1  # Move the pointer to the next position
+
+    return k  # Return the count of valid elements
+
+# Example usage:
+
+# Example 1
+nums1 = [1, 1, 1, 2, 2, 3]
+k1 = removeDuplicates(nums1)
+print(k1, nums1[:k1])  # Output: 5, [1, 1, 2, 2, 3]
+
+# Example 2
+nums2 = [0, 0, 1, 1, 1, 1, 2, 3, 3]
+k2 = removeDuplicates(nums2)
+print(k2, nums2[:k2])  # Output: 7, [0, 0, 1, 1, 2, 3, 3]
