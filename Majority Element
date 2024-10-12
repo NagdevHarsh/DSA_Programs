@@ -1,0 +1,22 @@
+Problem Explanation
+The task is to identify the element that occurs more than half the times in a given array.
+
+Key Points:
+The array is not necessarily sorted.
+The majority element will always occupy the middle index (or close to it) when the array is sorted.
+The task is to return the majority element by modifying the input array in-place (using O(1) extra space).
+Approach:
+We can use a sorting-based solution to efficiently find the majority element:
+
+Sort the array in non-decreasing order.
+Return the middle element of the sorted array. Since the majority element appears more than half the time, it is guaranteed to occupy the middle position (or nearby) after sorting.
+
+PYTHON CODE:
+
+def majorityElement(nums):
+    nums.sort()  # Step 1: Sort the array
+    return nums[len(nums) // 2]  # Step 2: Return the middle element
+
+# Example usage:
+print(majorityElement([3, 2, 3]))  # Output: 3
+print(majorityElement([2, 2, 1, 1, 1, 2, 2]))  # Output: 2
