@@ -1,0 +1,40 @@
+Approach
+Reverse the entire array to bring the last k elements to the front (but in reverse order).
+Reverse the first k elements to restore their correct order.
+Reverse the remaining n-k elements to place them correctly.
+This effectively shifts elements in O(n) time with O(1) space.
+
+Explanation:
+Example:
+📌 Input: nums = [1,2,3,4,5,6,7], k = 3
+
+1️⃣ Reverse the entire array:
+Before: [1, 2, 3, 4, 5, 6, 7]
+After: [7, 6, 5, 4, 3, 2, 1]
+
+2️⃣ Reverse the first k elements (k = 3):
+Before: [7, 6, 5, 4, 3, 2, 1]
+After: [5, 6, 7, 4, 3, 2, 1]
+
+3️⃣ Reverse the remaining n-k elements (n-k = 4):
+Before: [5, 6, 7, 4, 3, 2, 1]
+After: [5, 6, 7, 1, 2, 3, 4] ✅ (Correctly rotated)
+
+code:
+class Solution {
+public:
+    void rotate(vector<int>& nums, int k) {
+    int n = nums.size();
+    k = k % n; // Handle cases where k >= n
+
+    // Step 1: Reverse the entire array
+    reverse(nums.begin(), nums.end());
+
+    // Step 2: Reverse the first k elements
+    reverse(nums.begin(), nums.begin() + k);
+
+    // Step 3: Reverse the remaining n-k elements
+    reverse(nums.begin() + k, nums.end());
+        
+    }
+};
