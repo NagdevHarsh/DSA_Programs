@@ -1,0 +1,38 @@
+Given an integer array nums, return an array answer such that answer[i] is equal to the 
+product of all the elements of nums except nums[i].
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+Key Observations:
+To solve it without division, and in O(n) time, we do it in two passes:
+
+Left Pass:
+For each element, calculate the product of all elements to the left of it and store that
+in the result array.
+
+Right Pass:
+Multiply each element in the result array with the product of all elements to the right of it.
+
+
+
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int n = nums.length;
+        int[] result = new int[n];
+
+        // First pass: calculate prefix product (product of all elements to the left)
+        result[0] = 1;
+        for (int i = 1; i < n; i++) {
+            result[i] = result[i - 1] * nums[i - 1];
+        }
+
+        // Second pass: multiply with suffix product (product of all elements to the right)
+        int right = 1;
+        for (int i = n - 1; i >= 0; i--) {
+            result[i] = result[i] * right;
+            right *= nums[i];
+        }
+
+        return result;
+    }
+}
