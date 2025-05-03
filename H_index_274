@@ -1,0 +1,20 @@
+ Problem Explanation:
+The H-index of a researcher is the maximum number h such that:
+The researcher has at least h papers with at least h citations each.
+
+CODE:
+
+class Solution {
+public:
+    int hIndex(vector<int>& citations) {
+        int n = citations.size();
+        sort(citations.begin(), citations.end()); // built-in sort
+
+        for (int i = 0; i < n; i++) {
+            if (citations[i] >= n - i) {
+                return n - i;
+            }
+        }
+        return 0;
+    }
+};
