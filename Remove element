@@ -1,5 +1,7 @@
 Problem Explanation
-The goal of this problem is to remove all occurrences of a given integer val from an array nums in-place. You should then return the count of remaining elements that are not equal to val. The order of the elements can be changed, and you don't need to worry about the elements beyond the new length k.
+The goal of this problem is to remove all occurrences of a given integer val from an array nums in-place. 
+You should then return the count of remaining elements that are not equal to val. The order of the elements 
+can be changed, and you don't need to worry about the elements beyond the new length k.
 
 Key Requirements:
 In-place Modification: Modify the nums array directly without using additional space for another array.
