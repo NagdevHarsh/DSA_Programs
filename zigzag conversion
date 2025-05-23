@@ -1,0 +1,53 @@
+The string "PAYPALISHIRING" is written in a zigzag pattern on a given number of rows like this: (you may want to display this pattern in a fixed font for better legibility)
+
+P   A   H   N
+A P L S I I G
+Y   I   R
+And then read line by line: "PAHNAPLSIIGYIR"
+Write the code that will take a string and make this conversion given a number of rows:
+string convert(string s, int numRows);
+
+CODE:
+#include <iostream>
+#include <vector>
+using namespace std;
+
+class Solution {
+public:
+    string convert(string s, int numRows) {
+        if (numRows == 1 || numRows >= s.length())
+            return s;
+
+        vector<string> rows(numRows);
+        int currentRow = 0;
+        bool goingDown = false;
+
+        for (char c : s) {
+            rows[currentRow] += c;
+
+            // Change direction if we are at top or bottom row
+            if (currentRow == 0 || currentRow == numRows - 1)
+                goingDown = !goingDown;
+
+            currentRow += goingDown ? 1 : -1;
+        }
+
+        // Combine all rows
+        string result;
+        for (string row : rows)
+            result += row;
+
+        return result;
+    }
+};
+
+How It Works:
+Handle Edge Case: If numRows == 1, the string stays the same (no zigzag).
+Create Rows: A vector of strings to represent each row.
+Track Direction:
+Use a bool goingDown to know whether to move down or up in the zigzag.
+Distribute Characters:
+Append each character to the current row.
+Change direction when you hit the top or bottom row.
+Join Rows:
+Concatenate all rows to build the final string.
